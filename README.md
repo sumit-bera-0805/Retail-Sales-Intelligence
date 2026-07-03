@@ -327,7 +327,8 @@ https://github.com/sumit-bera-0805
 LinkedIn:
 
 ```
-Add your LinkedIn profile here
+www.linkedin.com/in/sumit-bera-715966282
+
 ```
 
 ---
