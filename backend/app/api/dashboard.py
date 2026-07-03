@@ -1,14 +1,34 @@
 from fastapi import APIRouter
 
-from backend.app.schemas.dashboard import DashboardResponse
-from backend.app.services.dashboard_service import get_dashboard_data
-
-router = APIRouter(
-    prefix="/dashboard",
-    tags=["Dashboard"]
-)
+router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
 
 
-@router.get("/", response_model=DashboardResponse)
+@router.get("/")
 def dashboard():
-    return get_dashboard_data()
+
+    return {
+
+        "total_sales": 2300000,
+
+        "customers": 793,
+
+        "products": 1862,
+
+        "profit": 286000,
+
+        "monthly_sales": [
+            120,
+            150,
+            170,
+            180,
+            210,
+            240,
+            280,
+            310,
+            295,
+            340,
+            390,
+            450
+        ]
+
+    }

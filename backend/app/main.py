@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from backend.app.api.health import router as health_router
@@ -12,11 +13,16 @@ from backend.app.api.regions import router as regions_router
 app = FastAPI(
     title="Retail Sales Intelligence API",
     description="Enterprise Retail Analytics Platform",
-    version="1.0.0"
+    version="2.0.0"
 )
 
+# Static Files
+app.mount("/static", StaticFiles(directory="backend/app/static"), name="static")
+
+# HTML Templates
 templates = Jinja2Templates(directory="backend/app/templates")
 
+# API Routers
 app.include_router(health_router)
 app.include_router(dashboard_router)
 app.include_router(sales_router)
@@ -28,8 +34,6 @@ app.include_router(regions_router)
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse(
-        "index.html",
-        {
-            "request": request
-        }
+        request=request,
+        name="index.html"
     )
